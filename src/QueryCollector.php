@@ -11,9 +11,9 @@ class QueryCollector
     public array $calls = [];
     protected ExpectationResolver $expectation;
 
-    public function __construct(ExpectationResolver $expectation)
+    public function __construct(?ExpectationResolver $expectation = null)
     {
-        $this->expectation = $expectation;
+        $this->expectation = $expectation ?? new ExpectationResolver('query', 'Query');
     }
 
     public function __call(string $name, array $arguments): self

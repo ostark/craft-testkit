@@ -23,7 +23,7 @@ class Element
     {
         $this->disableCustomFieldBehavior();
 
-        $this->mock      = \Mockery::mock('alias:' . $fqn)->makePartial();
+        $this->mock      = \Mockery::mock('overload:' . $fqn)->makePartial();
         $this->className = (new \ReflectionClass($fqn))->getShortName();
         $this->expectation = new ExpectationResolver(static::TYPE, $this->className);
     }
