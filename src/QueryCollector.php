@@ -8,8 +8,15 @@ use PHPUnit\Util\Printer;
 
 class QueryCollector
 {
+    /**
+     * @var array Collection of method calls
+     */
     public array $calls = [];
-    protected ExpectationResolver $expectation;
+
+    /**
+     * @var \ostark\CraftMockery\ExpectationResolver
+     */
+    protected $expectation;
 
     public function __construct(?ExpectationResolver $expectation = null)
     {
@@ -85,7 +92,7 @@ class QueryCollector
      *
      * @return mixed
      */
-    private function getResult($method = 'all')
+    private function getResult(string $method = 'all')
     {
         $this->expectation->addKey($this->queryKey($method));
         $this->expectation->addKey($method . '()');

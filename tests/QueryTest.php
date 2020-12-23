@@ -1,33 +1,34 @@
 <?php
 
 beforeAll(function () {
+    require_once "vendor/yiisoft/yii2/Yii.php";
     require_once "vendor/craftcms/cms/src/Craft.php";
 });
 
-test('query', function () {
+test('Custom query returns result', function () {
 
+    \ostark\CraftMockery\Service::all();
+    \ostark\CraftMockery\Query::make();
 
-    $collector = new \ostark\CraftMockery\QueryCollector();
-    $mock = \Mockery::mock('overload:' . \craft\db\Query::class)->makePartial()->shouldIgnoreMissing($collector);
-    $mock->shouldReceive('select')->andReturn($collector);
-
-
-    //$mock = \Mockery::mock('overload:'.\craft\db\Query::class)->makePartial();
-    //$mock->shouldReceive('select->from->where->column')->andReturn('123');
-
-    //$transaction = \Craft::$app->getDb()
-    //->beginTransaction();
-
-
-
-    $existingRecordIds = (new \craft\db\Query())
-        ->select('uid')
+    $customQueryResult = (new \craft\db\Query())
+        ->select('some_field')
         ->from('foo')
         ->where(['uid' => 1])
         ->all();
 
-    expect($existingRecordIds)->toBe('123');
+    expect($customQueryResult)->toBe(['result for: select().from(foo).where({uid:1}).all()']);
+
+});
 
 
+test('DB Transaction methods return null', function () {
+    \ostark\CraftMockery\Service::all();
+    $transaction = \Craft::$app->db->beginTransaction();
+    expect($transaction)->toBeNull();
+});
 
+test('DB open does not try to connect to DB', function () {
+    \ostark\CraftMockery\Service::all();
+    $connection = \Craft::$app->db->open();
+    expect($connection)->toBeNull();
 });

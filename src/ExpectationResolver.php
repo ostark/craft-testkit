@@ -8,14 +8,15 @@ use ostark\CraftMockery\Exceptions\NoKeysDefined;
 
 class ExpectationResolver
 {
-    public string $type;
-    private string $className;
+    private string $expectationFile;
     private array $keys = [];
 
-    public function __construct(string $type, string $className)
+    public function __construct(string $expectationFile)
     {
-        $this->type      = $type;
-        $this->className = $className;
+        $this->expectationFile = stristr($expectationFile, '.php')
+            ? $expectationFile
+            : $expectationFile . '.php';
+
     }
 
     public function addKey(string $key): void
@@ -28,7 +29,7 @@ class ExpectationResolver
     public function resolve()
     {
         if (count($this->keys) === 0) {
-            throw NoKeysDefined::forClass($this->className);
+            throw NoKeysDefined::inFile($this->expectationFile);
         }
 
         // Longest key first
@@ -44,16 +45,16 @@ class ExpectationResolver
             }
         }
 
-        throw MissingExpectationData::keys($this->keys, $this->className);
+        throw MissingExpectationData::keys($this->keys, $this->expectationFile);
     }
 
     private function loadFromFile(): array
     {
         // TODO: change path
-        $path = __DIR__ . "/../tests/expectations/{$this->type}/{$this->className}.php";
+        $path = __DIR__ . "/../tests/expectations/{$this->expectationFile}";
 
         if (!file_exists($path)) {
-            throw MissingExpectationData::path($path, $this->className);
+            throw MissingExpectationData::path($path);
         }
 
         return require $path;

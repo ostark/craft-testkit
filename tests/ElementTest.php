@@ -6,6 +6,7 @@ use ostark\CraftMockery\Element;
 
 beforeAll(function () {
     require_once "vendor/yiisoft/yii2/Yii.php";
+    require_once "vendor/craftcms/cms/src/Craft.php";
 });
 
 test('Entry::find() method is mocked', function () {
