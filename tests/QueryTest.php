@@ -9,6 +9,7 @@ test('query', function () {
 
     $collector = new \ostark\CraftMockery\QueryCollector();
     $mock = \Mockery::mock('overload:' . \craft\db\Query::class)->makePartial()->shouldIgnoreMissing($collector);
+    $mock->shouldReceive('select')->andReturn($collector);
 
 
     //$mock = \Mockery::mock('overload:'.\craft\db\Query::class)->makePartial();
