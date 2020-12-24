@@ -34,8 +34,7 @@ Assuming you have a class `NavigationService` with a method `getTopLevelCategori
 ```
 
 
-# WIP 
+## Mock Queries  
 
-* spies
-* flexible path
-* access service via property on Craft::$app (like Craft::$app->db)
+```
+```

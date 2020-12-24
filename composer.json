@@ -31,8 +31,12 @@
     "autoload": {
         "psr-4": {
             "ostark\\CraftMockery\\": "src/"
-        }
+        },
+        "files": [
+          "src/Fakes/helpers.php"
+        ]
     },
+
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"

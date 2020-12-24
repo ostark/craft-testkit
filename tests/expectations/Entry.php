@@ -9,8 +9,10 @@ return [
     'where({id:[1,2,3],status:2}).all()' => [
         'result for: where({id:[1,2,3],status:2}).all()'
     ],
-    'one()' => [
-        'fallback result for: one()'
-    ],
+    'one()' => entry([
+        'id' => 99,
+        'siteId' => '123',
+        'title' => 'fake'
+    ]),
 
 ];

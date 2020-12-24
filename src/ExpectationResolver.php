@@ -10,6 +10,7 @@ class ExpectationResolver
 {
     private string $expectationFile;
     private array $keys = [];
+    private string $basePath;
 
     public function __construct(string $expectationFile)
     {
@@ -17,6 +18,11 @@ class ExpectationResolver
             ? $expectationFile
             : $expectationFile . '.php';
 
+        $testPath = (defined('CRAFT_TESTS_PATH'))
+            ? CRAFT_TESTS_PATH
+            : __DIR__ . '/../tests';
+
+        $this->basePath = "{$testPath}/expectations";
     }
 
     public function addKey(string $key): void
@@ -50,8 +56,7 @@ class ExpectationResolver
 
     private function loadFromFile(): array
     {
-        // TODO: change path
-        $path = __DIR__ . "/../tests/expectations/{$this->expectationFile}";
+        $path = "{$this->basePath}/{$this->expectationFile}";
 
         if (!file_exists($path)) {
             throw MissingExpectationData::path($path);

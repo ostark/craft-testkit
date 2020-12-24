@@ -1,7 +1,7 @@
 <?php
 
 return [
-  'one()' => [
-      'result for: one()'
-  ]
+  'one()' => record([
+      'title' => 'first category'
+  ])
 ];

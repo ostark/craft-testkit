@@ -13,7 +13,7 @@ test('Resolves data for existing key', function () {
 
     $result = $expecation->resolve();
 
-    expect($result)->toBe(['fallback result for: one()']);
+    expect($result)->toBeInstanceOf(\ostark\CraftMockery\Fakes\Entry::class);
 });
 
 
