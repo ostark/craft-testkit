@@ -44,7 +44,7 @@ ostark\CraftMockery\Service::all();
 ## Expectations
 
 The actual results are stored in simple php files which named after the class name.
-The location for these files is `test/expectations`. Here is an example of an `Entry.php` file:
+The location for these files is `tests/expectations`. Here is an example of an `Entry.php` file:
 
 ```php
 <?php
@@ -62,7 +62,7 @@ return [
     ],
     'one()' => entry([
         'id' => 99,
-        'siteId' => '123',
+        'siteId' => 123,
         'title' => 'fake'
     ]),
 ];
