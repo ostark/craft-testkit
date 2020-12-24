@@ -16,25 +16,57 @@ Make sure to load this [tests/_bootstrap.php file](_bootstrap.example.php) with 
 
 ## Mock Elements
 
-Assuming you have a class `NavigationService` with a method `getTopLevelCategories()`. Within this method you call
-`$categories = \craft\elements\Category::find().level(1).all();` 
-
 ```
+ostark\CraftMockery\Element::make(\craft\elements\Entry::class);
+ostark\CraftMockery\Element::make(\craft\elements\Category::class);
 ```
-
 
 ## Mock Records
 
 ```
+ostark\CraftMockery\Record::make(\craft\elements\Entry::class);
+ostark\CraftMockery\Record::make(\craft\elements\Category::class);
 ```
 
 ## Mock Services  
 
 ```
+ostark\CraftMockery\Service::all();
 ```
 
 
 ## Mock Queries  
 
 ```
+\ostark\CraftMockery\Query::make(\craft\db\Query::class);
 ```
+
+## Expectations
+
+The actual results are stored in simple php files which named after the class name.
+The location for these files is `test/expectations`. Here is an example of an `Entry.php` file:
+
+```php
+<?php
+
+return [
+    'section(foo).all()' => [
+        entry([
+            'id' => 1,
+            'title' => 'Fake title'
+        ]),
+        entry([
+            'id' => 2,
+            'title' => 'Another fake title'
+        ])
+    ],
+    'one()' => entry([
+        'id' => 99,
+        'siteId' => '123',
+        'title' => 'fake'
+    ]),
+];
+```
+
+The keys in this array match with the chained methods of the query. To construct the values which are model objects, there are helper functions available:
+`entry()` and `record()`.
