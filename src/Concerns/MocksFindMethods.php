@@ -44,7 +44,7 @@ trait MocksFindMethods
             }
 
             $collector->where($criteria);
-            return $collector->one();
+            return $collector->all();
 
         });
     }
