@@ -1,16 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ostark\CraftMockery;
 
-use ostark\CraftMockery\Concerns\DisablesYiiBehavior;
-use ostark\CraftMockery\Concerns\MocksFindMethods;
+use Craft;
 
 class Record extends AbstractModel
 {
-
-    public static function make(string $class, string $expectationFile = null): self
+    public static function make(string $class, ?string $expectationFile = null): self
     {
-        \Craft::$app->db->setDriverName('mysql');
+        Craft::$app->db->setDriverName('mysql');
 
         $record = new static($class, $expectationFile);
         $record->defineFind();
@@ -19,5 +19,4 @@ class Record extends AbstractModel
 
         return $record;
     }
-
 }

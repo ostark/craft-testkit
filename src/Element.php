@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ostark\CraftMockery;
 
 class Element extends AbstractModel
 {
-    public static function make(string $class, string $expectationFile = null): self
+    public static function make(string $class, ?string $expectationFile = null): self
     {
         $element = new static($class, $expectationFile);
         $element->defineFind();
@@ -13,5 +15,4 @@ class Element extends AbstractModel
 
         return $element;
     }
-
 }

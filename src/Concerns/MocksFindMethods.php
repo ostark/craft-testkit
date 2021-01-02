@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ostark\CraftMockery\Concerns;
 
-use craft\behaviors\CustomFieldBehavior;
 use ostark\CraftMockery\QueryCollector;
 
 trait MocksFindMethods
@@ -17,7 +18,6 @@ trait MocksFindMethods
     protected function defineFindOne(): void
     {
         $this->mock->shouldReceive('findOne')->andReturnUsing(function ($criteria) {
-
             $collector = new QueryCollector($this->expectation);
 
             if (is_int($criteria)) {
@@ -27,14 +27,12 @@ trait MocksFindMethods
 
             $collector->where($criteria);
             return $collector->one();
-
         });
     }
 
     protected function defineFindAll(): void
     {
         $this->mock->shouldReceive('findAll')->andReturnUsing(function ($criteria) {
-
             $collector = new QueryCollector($this->expectation);
 
             // Array of ids
@@ -45,8 +43,6 @@ trait MocksFindMethods
 
             $collector->where($criteria);
             return $collector->all();
-
         });
     }
-
 }

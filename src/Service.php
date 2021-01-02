@@ -1,11 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ostark\CraftMockery;
 
+use Craft;
+use craft\console\Application as ConsoleApplication;
 use craft\db\Command;
 use craft\db\Connection;
 use craft\test\TestSetup;
+use craft\web\Application as WebApplication;
+use Mockery;
 use Mockery\MockInterface;
+use Yii;
 
 class Service
 {
@@ -13,9 +20,9 @@ class Service
 
     public function __construct()
     {
-        if (!(\Craft::$app instanceof MockInterface)) {
-            \Craft::$app = $this->applicationMock();
-            \Yii::$app   = \Craft::$app;
+        if (! (Craft::$app instanceof MockInterface)) {
+            Craft::$app = $this->applicationMock();
+            Yii::$app = Craft::$app;
         }
 
         $this->serviceMap = $this->getCraftServiceMap();
@@ -31,50 +38,49 @@ class Service
     public function mockServices(): void
     {
         foreach ($this->serviceMap as $class => $getter) {
-            $mockedService = \Mockery::mock($class)->makePartial();
-            \Craft::$app->shouldReceive($getter['method'])->andReturn($mockedService);
-            \Craft::$app->set($getter['property'], $mockedService);
+            $mockedService = Mockery::mock($class)->makePartial();
+            Craft::$app->shouldReceive($getter['method'])->andReturn($mockedService);
+            Craft::$app->set($getter['property'], $mockedService);
         }
     }
 
     public function mockDb(): void
     {
-        $command = \Mockery::mock(Command::class)->makePartial();
+        $command = Mockery::mock(Command::class)->makePartial();
         $command->shouldReceive('execute')->andReturn(1);
         $command
             ->shouldReceive('insert', 'update', 'upsert', 'replace', 'delete', 'softDelete')
             ->andReturnSelf();
 
-        $connection = \Mockery::mock(Connection::class)->makePartial();
+        $connection = Mockery::mock(Connection::class)->makePartial();
         $connection->shouldReceive('open', 'close', 'beginTransaction')->andReturnNull();
         $connection->shouldReceive('createCommand')->andReturn($command);
         $connection->shouldReceive('transaction')->andReturnUsing(function ($callback) {
             return call_user_func($callback, $this);
         });
 
-        \Craft::$app->set('db', $connection);
-        \Craft::$app->shouldReceive('getDb')->andReturn($connection);
-        \Craft::$app->shouldReceive('get')->with('db')->andReturn($connection);
+        Craft::$app->set('db', $connection);
+        Craft::$app->shouldReceive('getDb')->andReturn($connection);
+        Craft::$app->shouldReceive('get')->with('db')->andReturn($connection);
     }
 
-    public function applicationMock(): \Mockery\MockInterface
+    public function applicationMock(): MockInterface
     {
-        $applicationClass = (TestSetup::appType() === 'web')
-            ? \craft\web\Application::class
-            : \craft\console\Application::class;
+        $applicationClass = TestSetup::appType() === 'web'
+            ? WebApplication::class
+            : ConsoleApplication::class;
 
-        return \Mockery::mock($applicationClass)->makePartial();
+        return Mockery::mock($applicationClass)->makePartial();
     }
-
 
     private function getCraftServiceMap(): array
     {
         $map = TestSetup::getCraftServiceMap();
 
-        $classes = array_map(fn($row) => $row[0], $map);
-        $getters = array_map(fn($row) => [
+        $classes = array_map(fn ($row) => $row[0], $map);
+        $getters = array_map(fn ($row) => [
             'property' => $row[1][1],
-            'method'   => $row[1][0]
+            'method' => $row[1][0],
         ], $map);
 
         return array_combine($classes, $getters);

@@ -1,7 +1,8 @@
 <?php
 
-namespace ostark\CraftMockery;
+declare(strict_types=1);
 
+namespace ostark\CraftMockery;
 
 use ostark\CraftMockery\Exceptions\MissingExpectationData;
 use ostark\CraftMockery\Exceptions\NoKeysDefined;
@@ -9,7 +10,9 @@ use ostark\CraftMockery\Exceptions\NoKeysDefined;
 class ExpectationResolver
 {
     private string $expectationFile;
+
     private array $keys = [];
+
     private string $basePath;
 
     public function __construct(string $expectationFile)
@@ -18,7 +21,7 @@ class ExpectationResolver
             ? $expectationFile
             : $expectationFile . '.php';
 
-        $testPath = (defined('CRAFT_TESTS_PATH'))
+        $testPath = defined('CRAFT_TESTS_PATH')
             ? CRAFT_TESTS_PATH
             : __DIR__ . '/../tests';
 
@@ -27,7 +30,7 @@ class ExpectationResolver
 
     public function addKey(string $key): void
     {
-        if (!isset($this->keys[$key])) {
+        if (! isset($this->keys[$key])) {
             $this->keys[] = $key;
         }
     }
@@ -58,7 +61,7 @@ class ExpectationResolver
     {
         $path = "{$this->basePath}/{$this->expectationFile}";
 
-        if (!file_exists($path)) {
+        if (! file_exists($path)) {
             throw MissingExpectationData::path($path);
         }
 

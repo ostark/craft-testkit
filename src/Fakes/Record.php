@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ostark\CraftMockery\Fakes;
 
+use ostark\CraftMockery\Exceptions\DoNotCallMethod;
 use yii\db\BaseActiveRecord;
 
 class Record extends BaseActiveRecord
 {
     public $id = 1;
 
-    public function __set($name, $value)
+    public function __set($name, $value): void
     {
         parent::setAttribute($name, $value);
     }
@@ -18,19 +21,23 @@ class Record extends BaseActiveRecord
         return true;
     }
 
-    public static function primaryKey()
+    public static function primaryKey(): void
     {
+        throw new DoNotCallMethod();
     }
 
-    public static function find()
+    public static function find(): void
     {
+        throw new DoNotCallMethod();
     }
 
-    public function insert($runValidation = true, $attributes = null)
+    public function insert($runValidation = true, $attributes = null): void
     {
+        throw new DoNotCallMethod();
     }
 
-    public static function getDb()
+    public static function getDb(): void
     {
+        throw new DoNotCallMethod();
     }
 }

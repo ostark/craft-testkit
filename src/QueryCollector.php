@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ostark\CraftMockery;
 
 use ostark\CraftMockery\Exceptions\MissingExpectationData;
 use PHPUnit\Framework\IncompleteTestError;
-use PHPUnit\Util\Printer;
 
 class QueryCollector
 {
@@ -31,13 +32,13 @@ class QueryCollector
 
     public function where(array $criteria = []): self
     {
-        $this->calls['where'] = str_replace('"', '', (string)json_encode($criteria));
+        $this->calls['where'] = str_replace('"', '', (string) json_encode($criteria));
         return $this;
     }
 
     public function id($id_or_ids): self
     {
-        $this->calls['id'] = (string)json_encode((array)$id_or_ids);
+        $this->calls['id'] = (string) json_encode((array) $id_or_ids);
         return $this;
     }
 
@@ -86,10 +87,7 @@ class QueryCollector
         return $this->getResult('min');
     }
 
-
     /**
-     * @param string $method
-     *
      * @return mixed
      */
     private function getResult(string $method = 'all')
@@ -113,7 +111,7 @@ class QueryCollector
         $parts = [];
 
         foreach ($this->calls as $callMethod => $callArgs) {
-            $parts[] = sprintf('%s(%s)', $callMethod, (string)$callArgs);
+            $parts[] = sprintf('%s(%s)', $callMethod, (string) $callArgs);
         }
 
         $parts[] = $execMethod . '()';

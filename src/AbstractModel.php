@@ -1,12 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ostark\CraftMockery;
 
+use Mockery;
 use ostark\CraftMockery\Concerns\DisablesYiiBehavior;
 use ostark\CraftMockery\Concerns\MocksFindMethods;
+use ReflectionClass;
 
 abstract class AbstractModel
 {
+    use MocksFindMethods;
+    use DisablesYiiBehavior;
 
     /**
      * @var \Mockery\Mock | mixed
@@ -18,25 +24,23 @@ abstract class AbstractModel
      */
     protected $expectation;
 
-    use MocksFindMethods, DisablesYiiBehavior;
-
-    public function __construct(string $class, string $expectationFile = null)
+    public function __construct(string $class, ?string $expectationFile = null)
     {
         $this->disableCustomFieldBehavior();
 
-        $this->mock      = \Mockery::mock('overload:' . $class)->makePartial();
-        $this->expectation = new ExpectationResolver($expectationFile ?: (new \ReflectionClass($class))->getShortName());
+        $this->mock = Mockery::mock('overload:' . $class)->makePartial();
+        $this->expectation = new ExpectationResolver($expectationFile ?: (new ReflectionClass(
+            $class
+        ))->getShortName());
     }
-
 
     public static function setConstants(string $class, array $constantsMap): void
     {
-        $map = \Mockery::getConfiguration()->getConstantsMap();
+        $map = Mockery::getConfiguration()->getConstantsMap();
         $map[$class] = $constantsMap;
 
-        \Mockery::getConfiguration()->setConstantsMap($map);
+        Mockery::getConfiguration()->setConstantsMap($map);
     }
-
 
     /**
      * @return mixed|\Mockery\Mock
