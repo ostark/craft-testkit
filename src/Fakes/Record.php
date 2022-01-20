@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ostark\CraftMockery\Fakes;
+namespace ostark\TestKit\Fakes;
 
-use ostark\CraftMockery\Exceptions\DoNotCallMethod;
+use ostark\TestKit\Exceptions\DoNotCallMethod;
 use yii\db\BaseActiveRecord;
 
 class Record extends BaseActiveRecord

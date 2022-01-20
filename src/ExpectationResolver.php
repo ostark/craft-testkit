@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ostark\CraftMockery;
+namespace ostark\TestKit;
 
-use ostark\CraftMockery\Exceptions\MissingExpectationData;
-use ostark\CraftMockery\Exceptions\NoKeysDefined;
+use ostark\TestKit\Exceptions\MissingExpectationData;
+use ostark\TestKit\Exceptions\NoKeysDefined;
 
 class ExpectationResolver
 {

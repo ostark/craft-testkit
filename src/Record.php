@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ostark\CraftMockery;
+namespace ostark\TestKit;
 
 use Craft;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ostark\CraftMockery\Concerns;
+namespace ostark\TestKit\Concerns;
 
 use Craft;
 use craft\behaviors\CustomFieldBehavior;

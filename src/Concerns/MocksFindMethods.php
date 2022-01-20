@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ostark\CraftMockery\Concerns;
+namespace ostark\TestKit\Concerns;
 
-use ostark\CraftMockery\QueryCollector;
+use ostark\TestKit\QueryCollector;
 
 trait MocksFindMethods
 {

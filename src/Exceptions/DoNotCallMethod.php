@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ostark\CraftMockery\Exceptions;
+namespace ostark\TestKit\Exceptions;
 
 use Exception;
 

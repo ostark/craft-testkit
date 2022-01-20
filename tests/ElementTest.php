@@ -1,8 +1,8 @@
 <?php
 
 use craft\elements\Entry;
-use ostark\CraftMockery\QueryCollector;
-use ostark\CraftMockery\Element;
+use ostark\TestKit\QueryCollector;
+use ostark\TestKit\Element;
 
 beforeAll(function () {
     require_once "vendor/yiisoft/yii2/Yii.php";

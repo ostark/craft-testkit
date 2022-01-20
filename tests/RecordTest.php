@@ -1,7 +1,7 @@
 <?php
 
 use craft\records\Category;
-use ostark\CraftMockery\Record;
+use ostark\TestKit\Record;
 
 beforeAll(function () {
     require_once "vendor/yiisoft/yii2/Yii.php";

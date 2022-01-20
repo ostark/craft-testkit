@@ -6,5 +6,5 @@ beforeAll(function () {
 });
 
 test('App service', function (){
-   \ostark\CraftMockery\Service::all();
+   \ostark\TestKit\Service::all();
 });

@@ -7,8 +7,8 @@ beforeAll(function () {
 
 test('Custom query returns result', function () {
 
-    \ostark\CraftMockery\Service::all();
-    \ostark\CraftMockery\Query::make();
+    \ostark\TestKit\Service::all();
+    \ostark\TestKit\Query::make();
 
     $customQueryResult = (new \craft\db\Query())
         ->select('some_field')
@@ -22,13 +22,13 @@ test('Custom query returns result', function () {
 
 
 test('DB Transaction methods return null', function () {
-    \ostark\CraftMockery\Service::all();
+    \ostark\TestKit\Service::all();
     $transaction = \Craft::$app->db->beginTransaction();
     expect($transaction)->toBeNull();
 });
 
 test('DB open does not try to connect to DB', function () {
-    \ostark\CraftMockery\Service::all();
+    \ostark\TestKit\Service::all();
     $connection = \Craft::$app->db->open();
     expect($connection)->toBeNull();
 });

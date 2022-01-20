@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ostark\CraftMockery;
+namespace ostark\TestKit;
 
-use ostark\CraftMockery\Exceptions\MissingExpectationData;
+use ostark\TestKit\Exceptions\MissingExpectationData;
 use PHPUnit\Framework\IncompleteTestError;
 
 class QueryCollector
@@ -15,7 +15,7 @@ class QueryCollector
     public array $calls = [];
 
     /**
-     * @var \ostark\CraftMockery\ExpectationResolver
+     * @var \ostark\TestKit\ExpectationResolver
      */
     protected $expectation;
 

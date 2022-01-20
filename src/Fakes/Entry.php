@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ostark\CraftMockery\Fakes;
+namespace ostark\TestKit\Fakes;
 
 use craft\base\Element;
 

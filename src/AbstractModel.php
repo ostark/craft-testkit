@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ostark\CraftMockery;
+namespace ostark\TestKit;
 
 use Mockery;
-use ostark\CraftMockery\Concerns\DisablesYiiBehavior;
-use ostark\CraftMockery\Concerns\MocksFindMethods;
+use ostark\TestKit\Concerns\DisablesYiiBehavior;
+use ostark\TestKit\Concerns\MocksFindMethods;
 use ReflectionClass;
 
 abstract class AbstractModel
@@ -20,7 +20,7 @@ abstract class AbstractModel
     protected $mock;
 
     /**
-     * @var \ostark\CraftMockery\ExpectationResolver
+     * @var \ostark\TestKit\ExpectationResolver
      */
     protected $expectation;
 

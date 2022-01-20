@@ -1,6 +1,12 @@
-# Mockery for Craft Plugins and Modules
+# Testkit is a opinionated toolset for Craft Plugins and Modules
 
-This package helps with mocking objects in Craft using Mockery.
+Under the hood
+
+* Mockery
+* PestPHP
+
+...
+
 It's made for plugins or modules that do not touch the database heavily. In contrast to [fixtures](https://craftcms.com/docs/3.x/testing/testing-craft/fixtures.html) that define a consistent and predictable state of your test dataset, with mocking you can test different scenarios more easily with less setup efforts.
 
 Please mind, if your code relies heavily on database CRUD operations, this is probably not the right tool for your test.
@@ -17,28 +23,46 @@ Make sure to load this [tests/_bootstrap.php file](_bootstrap.example.php) with 
 ## Mock Elements
 
 ```
-ostark\CraftMockery\Element::make(\craft\elements\Entry::class);
-ostark\CraftMockery\Element::make(\craft\elements\Category::class);
+ostark\TestKit\Element::make(\craft\elements\Entry::class);
+ostark\TestKit\Element::make(\craft\elements\Category::class);
+
+// better interface?
+CategoryModel::mock();
+CategoryModel::mock()->using('expectations/Category.php');
+CategoryModel::mock()->setExpectations([
+    'save' => fn($value) => false,
+    'getFoo' => 'foo,  
+])
+
 ```
 
 ## Mock Records
 
 ```
-ostark\CraftMockery\Record::make(\craft\elements\Entry::class);
-ostark\CraftMockery\Record::make(\craft\elements\Category::class);
+ostark\TestKit\Record::make(\craft\elements\Entry::class);
+ostark\TestKit\Record::make(\craft\elements\Category::class);
 ```
 
 ## Mock Services  
 
 ```
-ostark\CraftMockery\Service::all();
+ostark\TestKit\Service::all();
 ```
 
 
 ## Mock Queries  
 
 ```
-\ostark\CraftMockery\Query::make(\craft\db\Query::class);
+\ostark\TestKit\Query::make(\craft\db\Query::class);
+
+// better interface?
+EntryQuery:mock();
+EntryQuery::mock()->using('expectations/EntryQuery.php');
+EntryQuery::mock()->setExpectations([
+    'save' => fn($value) => false,
+    'getFoo' => 'foo,  
+])
+
 ```
 
 ## Expectations
