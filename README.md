@@ -1,6 +1,6 @@
-# Testkit is a opinionated toolset for Craft Plugins and Modules
+# 🦠🧑‍🔬 Testkit is an opinionated toolset for Craft Plugins and Modules 
 
-Under the hood
+Under the hood 
 
 * Mockery
 * PestPHP

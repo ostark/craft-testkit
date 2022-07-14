@@ -12,7 +12,8 @@ class Record extends AbstractModel
     {
         Craft::$app->db->setDriverName('mysql');
 
-        $record = new static($class, $expectationFile);
+        $record = new self($class, $expectationFile);
+
         $record->defineFind();
         $record->defineFindAll();
         $record->defineFindOne();

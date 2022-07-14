@@ -13,6 +13,7 @@ use craft\web\Application as WebApplication;
 use Mockery;
 use Mockery\MockInterface;
 use Yii;
+use yii\web\Application;
 
 class Service
 {
@@ -20,10 +21,13 @@ class Service
 
     public function __construct()
     {
+
         if (! (Craft::$app instanceof MockInterface)) {
-            Craft::$app = $this->applicationMock();
-            Yii::$app = Craft::$app;
+            $mockedApp  = $this->applicationMock();
+            Craft::$app = $mockedApp;
+            Yii::$app = $mockedApp;
         }
+
 
         $this->serviceMap = $this->getCraftServiceMap();
     }
@@ -47,24 +51,28 @@ class Service
     public function mockDb(): void
     {
         $command = Mockery::mock(Command::class)->makePartial();
-        $command->shouldReceive('execute')->andReturn(1);
-        $command
-            ->shouldReceive('insert', 'update', 'upsert', 'replace', 'delete', 'softDelete')
-            ->andReturnSelf();
+        $command->allows('execute')->andReturns(1);
+
+        foreach (['insert', 'update', 'upsert', 'replace', 'delete', 'softDelete'] as $writeCms) {
+            $command->allows($writeCms)->andReturnSelf();
+
+        }
 
         $connection = Mockery::mock(Connection::class)->makePartial();
-        $connection->shouldReceive('open', 'close', 'beginTransaction')->andReturnNull();
-        $connection->shouldReceive('createCommand')->andReturn($command);
-        $connection->shouldReceive('transaction')->andReturnUsing(function ($callback) {
+        $connection->allows('open')->andReturns(null);
+        $connection->allows('close')->andReturns(null);
+        $connection->allows('beginTransaction')->andReturns(null);
+        $connection->allows('createCommand')->andReturns($command);
+        $connection->allows('transaction')->andReturnUsing(function ($callback) {
             return call_user_func($callback, $this);
         });
 
         Craft::$app->set('db', $connection);
-        Craft::$app->shouldReceive('getDb')->andReturn($connection);
-        Craft::$app->shouldReceive('get')->with('db')->andReturn($connection);
+        Craft::$app->allows('getDb')->andReturn($connection);
+        Craft::$app->allows('get')->with('db')->andReturn($connection);
     }
 
-    public function applicationMock(): MockInterface
+    public function applicationMock(): MockInterface|WebApplication|ConsoleApplication
     {
         $applicationClass = TestSetup::appType() === 'web'
             ? WebApplication::class

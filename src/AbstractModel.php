@@ -17,8 +17,9 @@ abstract class AbstractModel
     /**
      * @var \Mockery\Mock | mixed
      */
-    protected $mock;
+    protected $mock = null;
 
+    public static array $mocks = [];
     /**
      * @var \ostark\TestKit\ExpectationResolver
      */
@@ -27,11 +28,10 @@ abstract class AbstractModel
     public function __construct(string $class, ?string $expectationFile = null)
     {
         $this->disableCustomFieldBehavior();
+        $this->mock = overload($class)->makePartial();
 
-        $this->mock = Mockery::mock('overload:' . $class)->makePartial();
-        $this->expectation = new ExpectationResolver($expectationFile ?: (new ReflectionClass(
-            $class
-        ))->getShortName());
+        $shortName = $expectationFile ?: (new ReflectionClass($class))->getShortName();
+        $this->expectation = new ExpectationResolver($shortName);
     }
 
     public static function setConstants(string $class, array $constantsMap): void

@@ -31,7 +31,7 @@ class Record extends BaseActiveRecord
         throw new DoNotCallMethod();
     }
 
-    public function insert($runValidation = true, $attributes = null): void
+    public function insert($runValidation = true, $attributes = null)
     {
         throw new DoNotCallMethod();
     }

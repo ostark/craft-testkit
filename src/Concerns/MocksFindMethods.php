@@ -10,14 +10,14 @@ trait MocksFindMethods
 {
     protected function defineFind(): void
     {
-        $this->mock->shouldReceive('find')->andReturn(
+        $this->mock->allows('find')->andReturns(
             new QueryCollector($this->expectation)
         );
     }
 
     protected function defineFindOne(): void
     {
-        $this->mock->shouldReceive('findOne')->andReturnUsing(function ($criteria) {
+        $this->mock->allows('findOne')->andReturnUsing(function ($criteria) {
             $collector = new QueryCollector($this->expectation);
 
             if (is_int($criteria)) {
@@ -32,7 +32,7 @@ trait MocksFindMethods
 
     protected function defineFindAll(): void
     {
-        $this->mock->shouldReceive('findAll')->andReturnUsing(function ($criteria) {
+        $this->mock->allows('findAll')->andReturnUsing(function ($criteria) {
             $collector = new QueryCollector($this->expectation);
 
             // Array of ids

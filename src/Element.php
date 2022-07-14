@@ -8,7 +8,7 @@ class Element extends AbstractModel
 {
     public static function make(string $class, ?string $expectationFile = null): self
     {
-        $element = new static($class, $expectationFile);
+        $element = new self($class, $expectationFile);
         $element->defineFind();
         $element->defineFindAll();
         $element->defineFindOne();

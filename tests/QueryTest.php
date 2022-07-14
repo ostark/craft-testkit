@@ -1,9 +1,5 @@
 <?php
 
-beforeAll(function () {
-    require_once "vendor/yiisoft/yii2/Yii.php";
-    require_once "vendor/craftcms/cms/src/Craft.php";
-});
 
 test('Custom query returns result', function () {
 
@@ -32,3 +28,9 @@ test('DB open does not try to connect to DB', function () {
     $connection = \Craft::$app->db->open();
     expect($connection)->toBeNull();
 });
+
+
+afterEach(function () {
+    \Mockery::close();
+});
+

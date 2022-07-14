@@ -21,7 +21,7 @@ class QueryCollector
 
     public function __construct(?ExpectationResolver $expectation = null)
     {
-        $this->expectation = $expectation ?? new ExpectationResolver('query', 'Query');
+        $this->expectation = $expectation ?? new ExpectationResolver('Query',);
     }
 
     public function __call(string $name, array $arguments): self

@@ -4,15 +4,16 @@ use craft\elements\Entry;
 use ostark\TestKit\QueryCollector;
 use ostark\TestKit\Element;
 
-beforeAll(function () {
-    require_once "vendor/yiisoft/yii2/Yii.php";
-    require_once "vendor/craftcms/cms/src/Craft.php";
-});
-
 test('Entry::find() method is mocked', function () {
     Element::make(Entry::class);
+    $result = Entry::find();
+    expect($result)->toBeInstanceOf(QueryCollector::class);
+});
 
-    expect(Entry::find())->toBeInstanceOf(QueryCollector::class);
+test('Entry::find() method is mocked again', function () {
+    Element::make(Entry::class);
+    $result = Entry::find();
+    expect($result)->toBeInstanceOf(QueryCollector::class);
 });
 
 test('Entry::find() with section() returns some result', function () {
@@ -36,3 +37,4 @@ test('Entry::findOne(3) returns some result', function () {
     $result = Entry::findOne(3);
     expect($result)->not()->toBeNull();
 });
+

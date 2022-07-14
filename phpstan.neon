@@ -1,6 +1,13 @@
+includes:
+  - vendor/phpstan/phpstan-mockery/extension.neon
+  - vendor/craftcms/phpstan/phpstan.neon
+
 parameters:
+  level: 5
   checkMissingIterableValueType: false
   scanFiles:
     - %currentWorkingDirectory%/vendor/yiisoft/yii2/Yii.php
     - %currentWorkingDirectory%/vendor/craftcms/cms/src/Craft.php
     - %currentWorkingDirectory%/vendor/craftcms/cms/src/behaviors/CustomFieldBehavior.php.template
+  ignoreErrors:
+    - '#Call to an undefined method craft\\console\\Application|craft\\web\\Application::allows\(\)#'

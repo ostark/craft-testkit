@@ -15,7 +15,9 @@ trait DisablesYiiBehavior
     {
         if (Yii::$container->has(CustomFieldBehavior::class)) {
             spl_autoload_unregister([Craft::class, 'autoload']);
-            Yii::$container->set(CustomFieldBehavior::class, new Behavior());
+            Yii::$container->set(CustomFieldBehavior::class, new class() extends Behavior {
+                public bool $canSetProperties;
+            });
         }
     }
 }
