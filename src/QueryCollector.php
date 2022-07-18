@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ostark\TestKit;
+namespace fortrabbit\TestKit;
 
-use ostark\TestKit\Exceptions\MissingExpectationData;
+use fortrabbit\TestKit\Exceptions\MissingExpectationData;
 use PHPUnit\Framework\IncompleteTestError;
 
 class QueryCollector
@@ -15,7 +15,7 @@ class QueryCollector
     public array $calls = [];
 
     /**
-     * @var \ostark\TestKit\ExpectationResolver
+     * @var \fortrabbit\TestKit\ExpectationResolver
      */
     protected $expectation;
 

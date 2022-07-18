@@ -1,8 +1,8 @@
 <?php
 
 use craft\elements\Entry;
-use ostark\TestKit\QueryCollector;
-use ostark\TestKit\Element;
+use fortrabbit\TestKit\QueryCollector;
+use fortrabbit\TestKit\Element;
 
 test('Entry::find() method is mocked', function () {
     Element::make(Entry::class);

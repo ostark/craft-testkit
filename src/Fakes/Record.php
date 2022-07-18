@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ostark\TestKit\Fakes;
+namespace fortrabbit\TestKit\Fakes;
 
-use ostark\TestKit\Exceptions\DoNotCallMethod;
+use fortrabbit\TestKit\Exceptions\DoNotCallMethod;
 use yii\db\BaseActiveRecord;
 
 class Record extends BaseActiveRecord

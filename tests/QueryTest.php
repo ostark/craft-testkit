@@ -3,8 +3,8 @@
 
 test('Custom query returns result', function () {
 
-    \ostark\TestKit\Service::all();
-    \ostark\TestKit\Query::make();
+    \fortrabbit\TestKit\Service::all();
+    \fortrabbit\TestKit\Query::make();
 
     $customQueryResult = (new \craft\db\Query())
         ->select('some_field')
@@ -18,13 +18,13 @@ test('Custom query returns result', function () {
 
 
 test('DB Transaction methods return null', function () {
-    \ostark\TestKit\Service::all();
+    \fortrabbit\TestKit\Service::all();
     $transaction = \Craft::$app->db->beginTransaction();
     expect($transaction)->toBeNull();
 });
 
 test('DB open does not try to connect to DB', function () {
-    \ostark\TestKit\Service::all();
+    \fortrabbit\TestKit\Service::all();
     $connection = \Craft::$app->db->open();
     expect($connection)->toBeNull();
 });

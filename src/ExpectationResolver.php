@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ostark\TestKit;
+namespace fortrabbit\TestKit;
 
-use ostark\TestKit\Exceptions\MissingExpectationData;
-use ostark\TestKit\Exceptions\NoKeysDefined;
+use fortrabbit\TestKit\Exceptions\MissingExpectationData;
+use fortrabbit\TestKit\Exceptions\NoKeysDefined;
 
 class ExpectationResolver
 {

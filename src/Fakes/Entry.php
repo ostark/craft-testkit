@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ostark\TestKit\Fakes;
+namespace fortrabbit\TestKit\Fakes;
 
 use craft\base\Element;
-use craft\behaviors\CustomFieldBehavior;
 
 class Entry extends Element
 {
@@ -15,7 +14,7 @@ class Entry extends Element
     {
         return [
             'customFields' => [
-                'class' => \ostark\TestKit\Fakes\CustomFieldBehavior::class,
+                'class' => \fortrabbit\TestKit\Fakes\CustomFieldBehavior::class,
             ],
         ];
     }

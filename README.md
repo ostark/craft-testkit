@@ -15,7 +15,7 @@ Please mind, if your code relies heavily on database CRUD operations, this is pr
 
 ```
 cd projects/your-plugin
-composer require --dev ostark/craft-mockery
+composer require --dev fortrabbit/craft-mockery
 ```
 
 Make sure to load this [tests/_bootstrap.php file](_bootstrap.example.php) with your tests. For PHPUnit your define it in phpunit.xml using the `bootstrap` property or in Codeception your .yml files.
@@ -23,8 +23,8 @@ Make sure to load this [tests/_bootstrap.php file](_bootstrap.example.php) with 
 ## Mock Elements
 
 ```
-ostark\TestKit\Element::make(\craft\elements\Entry::class);
-ostark\TestKit\Element::make(\craft\elements\Category::class);
+fortrabbit\TestKit\Element::make(\craft\elements\Entry::class);
+fortrabbit\TestKit\Element::make(\craft\elements\Category::class);
 
 // better interface?
 CategoryModel::mock();
@@ -39,21 +39,21 @@ CategoryModel::mock()->setExpectations([
 ## Mock Records
 
 ```
-ostark\TestKit\Record::make(\craft\elements\Entry::class);
-ostark\TestKit\Record::make(\craft\elements\Category::class);
+fortrabbit\TestKit\Record::make(\craft\elements\Entry::class);
+fortrabbit\TestKit\Record::make(\craft\elements\Category::class);
 ```
 
 ## Mock Services  
 
 ```
-ostark\TestKit\Service::all();
+fortrabbit\TestKit\Service::all();
 ```
 
 
 ## Mock Queries  
 
 ```
-\ostark\TestKit\Query::make(\craft\db\Query::class);
+\fortrabbit\TestKit\Query::make(\craft\db\Query::class);
 
 // better interface?
 EntryQuery:mock();

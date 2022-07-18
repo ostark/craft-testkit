@@ -1,7 +1,7 @@
 <?php
 
 use craft\records\Category;
-use ostark\TestKit\Record;
+use fortrabbit\TestKit\Record;
 
 test('Record::find() returns some result', function () {
     Record::make(Category::class);

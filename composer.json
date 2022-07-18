@@ -1,5 +1,5 @@
 {
-    "name": "ostark/craft-testkit",
+    "name": "fortrabbit/craft-testkit",
     "description": "Testkit for Craft plugins and modules",
     "type": "library",
     "keywords": [
@@ -32,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ostark\\TestKit\\": "src/"
+            "fortrabbit\\TestKit\\": "src/"
         },
         "files": [
           "src/helpers.php"

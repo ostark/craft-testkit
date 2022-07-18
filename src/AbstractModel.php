@@ -2,17 +2,15 @@
 
 declare(strict_types=1);
 
-namespace ostark\TestKit;
+namespace fortrabbit\TestKit;
 
 use Mockery;
-use ostark\TestKit\Concerns\DisablesYiiBehavior;
-use ostark\TestKit\Concerns\MocksFindMethods;
+use fortrabbit\TestKit\Concerns\MocksFindMethods;
 use ReflectionClass;
 
 abstract class AbstractModel
 {
     use MocksFindMethods;
-    use DisablesYiiBehavior;
 
     /**
      * @var \Mockery\Mock | mixed
@@ -21,13 +19,12 @@ abstract class AbstractModel
 
     public static array $mocks = [];
     /**
-     * @var \ostark\TestKit\ExpectationResolver
+     * @var \fortrabbit\TestKit\ExpectationResolver
      */
     protected $expectation;
 
     public function __construct(string $class, ?string $expectationFile = null)
     {
-        $this->disableCustomFieldBehavior();
         $this->mock = overload($class)->makePartial();
 
         $shortName = $expectationFile ?: (new ReflectionClass($class))->getShortName();

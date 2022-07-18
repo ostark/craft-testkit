@@ -1,7 +1,7 @@
 <?php
 
-use ostark\TestKit\Fakes\Entry;
-use ostark\TestKit\Fakes\Record;
+use fortrabbit\TestKit\Fakes\Entry;
+use fortrabbit\TestKit\Fakes\Record;
 
 class StaticStore {
     public static array $mocks = [];
@@ -37,7 +37,7 @@ if (! function_exists('entry')) {
     /**
      * Create a fake Entry
      *
-     * @return \ostark\TestKit\Fakes\Entry
+     * @return \fortrabbit\TestKit\Fakes\Entry
      */
     function entry(array $fields = [])
     {
@@ -49,7 +49,7 @@ if (! function_exists('record')) {
     /**
      * Create a fake Entry
      *
-     * @return \ostark\TestKit\Fakes\Record
+     * @return \fortrabbit\TestKit\Fakes\Record
      */
     function record(array $fields = [])
     {

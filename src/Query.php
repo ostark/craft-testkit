@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ostark\TestKit;
+namespace fortrabbit\TestKit;
 
 use Mockery\MockInterface;
 

@@ -5,7 +5,7 @@
  * @license http://craftcms.com/license
  */
 
-namespace ostark\TestKit\Fakes;
+namespace fortrabbit\TestKit\Fakes;
 
 use yii\base\Behavior;
 

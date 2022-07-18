@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ostark\TestKit\Exceptions;
+namespace fortrabbit\TestKit\Exceptions;
 
 use Exception;
 

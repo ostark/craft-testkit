@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ostark\TestKit\Concerns;
+namespace fortrabbit\TestKit\Concerns;
 
-use ostark\TestKit\QueryCollector;
+use fortrabbit\TestKit\QueryCollector;
 
 trait MocksFindMethods
 {
