@@ -65,6 +65,17 @@ test('rendered twig template matches snapshot', function () {
     expect($rendered)->toMatchSnapshot()
 });
 
+
+test('events has been fired', function () {
+    EventTester::on('*', );
+        
+    // exec code 
+    
+    EventTester::assertTrigger(Some::class, Some::EVENT_NAME);
+    EventTester::assertHandler(Some::class, Some::EVENT_NAME);
+    
+});
+
 ```
 
 ## Helper functions

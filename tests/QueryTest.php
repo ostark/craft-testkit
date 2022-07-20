@@ -27,13 +27,9 @@ test('DB Transaction methods return null', function () {
 
 test('DB open does not try to connect to DB', function () {
     \fortrabbit\TestKit\Service::all();
-    $error = false;
-    try {
+    expect(function () {
         \Craft::$app->db->open();
-    } catch (\Exception) {
-        $error = true;
-    }
-    expect($error)->toBeFalse();
+    })->not()->toThrow(\Exception::class);
 });
 
 
