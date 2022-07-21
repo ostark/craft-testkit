@@ -1,6 +1,8 @@
 <?php
 
 
+use craft\errors\DbConnectException;
+
 test('Custom query returns result', function () {
 
     \fortrabbit\TestKit\Service::all();
@@ -25,8 +27,9 @@ test('DB Transaction methods return null', function () {
 
 test('DB open does not try to connect to DB', function () {
     \fortrabbit\TestKit\Service::all();
-    $connection = \Craft::$app->db->open();
-    expect($connection)->toBeNull();
+    expect(function () {
+        \Craft::$app->db->open();
+    })->not()->toThrow(\Exception::class);
 });
 
 

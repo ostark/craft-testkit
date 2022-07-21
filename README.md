@@ -9,7 +9,13 @@ Under the hood
 
 ---
 
-TODO: Review / refactor the interfaces
+TODO: 
+* Review / refactor the interfaces
+* Consider to move the current code under `Mock` namespace
+* Add support to test Events
+* Add support to test Queue / Jobs
+
+
 
 ---
 
@@ -30,12 +36,55 @@ Make sure to load this [tests/_bootstrap.php file](_bootstrap.example.php) with 
 
 ## Write your first test
 
-.
-.
-.
-.
+```php
+
+test('plugin initialize', function () {
+    $plugin = plugin(MyPluginClass:class);
+    $handle = $plugin->handle;
+    
+    expect($handle)->toBe('my-handle');
+});
+
+test('numberService::rand() returns expected result', function () {
+    $plugin = plugin(MyPluginClass:class);
+    $result = $plugin->numberService->rand(1, 300);
+    
+    expect($result)->toBeInt();
+    expect($result)->toBeGreaterThanOrEqual(1);
+    expect($result)->toBeLessThanOrEqual(300);
+});
+
+test('rendered twig template matches snapshot', function () {
+    $twig = twig('path/to/partial.twig')
+        ->setEvironment(...)
+        ->setVars(['x' => 'c'])
+        ->setEntry();
+        
+    $rendered = $twig->render();  
+    
+    expect($rendered)->toMatchSnapshot()
+});
 
 
+test('events has been fired', function () {
+    EventTester::on('*', );
+        
+    // exec code 
+    
+    EventTester::assertTrigger(Some::class, Some::EVENT_NAME);
+    EventTester::assertHandler(Some::class, Some::EVENT_NAME);
+    
+});
+
+```
+
+## Helper functions
+
+* `plugin(sting $class)` to initialize your main plugin class
+* `twig(string $path)` to render twig pages or partials
+* `event()` to test events
+* `queue()` to test queue
+* `overload()` to mock a class instance that is hardcoded and not injectable
 
 ## Mocking
 
